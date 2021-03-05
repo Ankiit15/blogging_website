@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block body %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url({{ url_for ('static' , filename = 'img/contact-bg.jpg')}})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>ADMIN PANEL</h1>
+            <span class="subheading">Edit Post</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="clearfix" align="left">
+<a class="btn btn-primary"  href="/adminpanel">Admin Panel Home</a>
+<a class="btn btn-danger float-right"  href="/logout">Logout</a>
+<hr>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+        
+        <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+        <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+        <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+        <form name="sentMessage" id="contactForm" action = '/edit/{{sno}}' method = 'post' autocomplete="off" >
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Title</label>
+              <input type="text" class="form-control" placeholder="Title" id="title" , name = 'title' required data-validation-required-message="Please enter your name." value="{{post.title}}">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Sub Heading</label>
+              <input type="text" class="form-control" placeholder="Sub Heading" id="subhead" name = 'subhead' required data-validation-required-message="Please enter your email address." value="{{post.sub_head}}">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div> <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Slug</label>
+              <input type="text" class="form-control" placeholder="slug" id="slug" name = 'slug' required data-validation-required-message="Please enter your email address." value="{{post.slug}}">
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+              <label>Content</label>
+              <textarea rows="8" class="form-control" placeholder="Content" id="content" name = 'content' required data-validation-required-message="Please enter a message.">{{post.content}}</textarea>
+              <p class="help-block text-danger"></p>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+              <label>Image file</label>
+              <input type="text"  class="form-control" placeholder="Image file" id="img" name = 'img' required data-validation-required-message="Please enter a message." value="{{post.img_file}}"></textarea>
+              <p class="help-block text-danger">
+              </p>
+            </div>
+          </div>
+          <br>
+          <div id="success"></div>
+          <button id="btnSubmit" type="submit" class="btn btn-primary" id="sendMessageButton">SUBMIT</button>
+          <br /><br />
+          <!-- <div id = 'myAlert' class="alert alert-danger collapse">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>DELETE!</strong>Are you sure you want to delete ?</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <hr> -->
+
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    $(document).ready(function(){
+      $("#btnSubmit").click(function(){
+        $("#myAlert").show('fade');
+
+      });
+    });
+  </script> -->
+
+ {% endblock %}

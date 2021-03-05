@@ -1,0 +1,157 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url( {{url_for ('static',filename =  'img/admin.jpg')}})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1>Admin Panel</h1>
+            <span class="subheading">Welcome Admin. Now edit your posts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+ <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        
+<a class="btn btn-primary float-left"   href="/edit/0">Add New Post</a>
+<a class="btn btn-primary float-right" href="/addvid">Add Videos</a>
+
+
+<div class="text-center">
+<button type="button" class="btn btn-danger button-center" data-toggle="modal" data-target="#exampleModal">
+  Logout
+</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="col-12 modal-title text-center" id="exampleModalLabel">LOGOUT</h5>
+      
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you Sure you want to logout?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <a href="/logout" class="btn btn-primary">Yes</a>
+      </div>
+    </div>
+  </div>
+</div>
+<p></p>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>{{message}}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+
+
+
+
+<hr>
+<h1>File Uploader</h1>
+<p> </p>
+<!-- <form action="/uploader" method = 'post'>
+  
+    <label for="uploader">Upload Files Here</label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    <button type="button" class="btn btn-danger">UPLOAD</button>
+  
+</form> -->
+
+<form class="mb 50" action="/uploader" method="post" enctype="multipart/form-data">
+  <input type="file" name="file1" align="float-left">
+  
+  <button type="submit" class="btn btn-danger float-right">Submit</button>
+
+</form>
+<p></p>
+
+<p></p>
+<hr>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">S No.</th>
+      <th scope="col">Title</th>
+      <th scope="col">Sub-heading</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for post in posts|reverse %}
+    <tr>
+      <th scope="row">{{post.serial_no}}</th>
+      <!-- <td>{{post.serial_no}}</td> -->
+      <td>{{post.title}}</td>
+      <td>{{post.sub_head}}</td>
+      <td><a href={{"/edit/"~post.serial_no}}><button class="btn btn-primary">EDIT</button></a></td>
+      <td><button type="button" class="btn btn-danger button-center" data-toggle="modal" data-target="#exampleModal2{{post.serial_no}}" >Delete</button>
+        
+  
+</button>
+
+<div class="modal fade" id="exampleModal2{{post.serial_no}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2{{post.serial_no}}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        
+        <h5 class="col-12 modal-title text-center" id="exampleModalLabel2">DELETE</h5>
+      
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you Sure you want to Delete this Post?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <a href={{"/delete/"~post.serial_no}} class="btn btn-danger" >Yes</a>
+       
+        
+        
+    </div>
+  </div>
+</div>
+</div>
+</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+    </div>
+  </div>
+  <!-- Main Content -->
+
+  <hr>
+
+  
+{% endblock %}
